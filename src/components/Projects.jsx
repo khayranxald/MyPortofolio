@@ -8,7 +8,7 @@ import ProjectModal from "./ProjectModal";
 const projectsList = [
   {
     id: 1,
-    title: "Spider-Net HUD Dashboard",
+    title: "Semua project di privasi",
     description: "Realtime data visualizer with dynamic web network nodes and custom Canvas monitoring loops.",
     details: "A premium monitoring panel rendering system telemetry. Built to display active server nodes using high-performance HTML5 Canvas lines. Integrates a custom theme-state matrix and low-latency network indicators.",
     tech: ["React", "Vite", "Tailwind CSS", "Canvas"],
@@ -102,16 +102,16 @@ const Projects = () => {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left; // x position inside element
     const y = e.clientY - rect.top;  // y position inside element
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     // Rotate values range: -10deg to 10deg
     const rotateX = ((centerY - y) / centerY) * 8;
     const rotateY = ((x - centerX) / centerX) * 8;
 
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    
+
     // Move glow spotlight reflection
     const glow = card.querySelector(".card-spotlight");
     if (glow) {
@@ -132,8 +132,8 @@ const Projects = () => {
   };
 
   return (
-    <section 
-      id="projects" 
+    <section
+      id="projects"
       className="relative min-h-screen w-full py-28 px-4 flex flex-col items-center justify-center select-none"
     >
       <div className="absolute inset-0 grid-overlay opacity-15 pointer-events-none" />
@@ -143,7 +143,7 @@ const Projects = () => {
         <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase">
           Compiled Works
         </span>
-        <h2 
+        <h2
           className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mt-1 text-glow"
           style={{ "--color-glow": `${color}33` }}
         >
@@ -186,11 +186,11 @@ const Projects = () => {
               {/* Card Core Content */}
               <div>
                 {/* Visual Thumbnail simulation */}
-                <div 
+                <div
                   className="w-full h-36 rounded-2xl bg-black/40 border border-white/5 relative overflow-hidden flex items-center justify-center mb-5 group-hover:border-white/10 transition-colors"
                 >
                   <div className="absolute inset-0 grid-overlay opacity-25" />
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-full border border-dashed flex items-center justify-center animate-spin"
                     style={{ borderColor: `${color}22`, animationDuration: "16s" }}
                   />
@@ -214,7 +214,7 @@ const Projects = () => {
               <div>
                 <div className="flex flex-wrap gap-1.5 mb-5 pointer-events-none">
                   {project.tech.slice(0, 3).map((t) => (
-                    <span 
+                    <span
                       key={t}
                       className="px-2 py-0.5 rounded bg-white/5 border border-white/5 text-[9px] font-mono text-slate-400"
                     >
@@ -264,9 +264,9 @@ const Projects = () => {
       {/* Dynamic Detail Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal 
-            project={selectedProject} 
-            onClose={() => setSelectedProject(null)} 
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
           />
         )}
       </AnimatePresence>

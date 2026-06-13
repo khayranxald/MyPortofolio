@@ -75,9 +75,9 @@ const Hero = () => {
         
         {/* Left Column: Oversized Typography & Info */}
         <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
         >
           {/* Oversized typography with animated gradient styling */}
@@ -155,7 +155,7 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5 relative w-full flex justify-center items-center min-h-[420px] lg:min-h-[500px]"
         >
           {/* Holographic HUD grid lines (Background) */}
@@ -181,137 +181,165 @@ const Hero = () => {
 
           {/* Widget 1: System Info Widget (Floating top-left) */}
           <motion.div
-            animate={{
-              y: [0, -12, 0],
-              x: [0, 8, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="visionos-glass visionos-glass-hover p-4 rounded-[24px] absolute top-4 left-2 sm:left-6 md:left-12 z-20 flex items-center gap-3"
+            initial={{ opacity: 0, scale: 0.7, x: 25, y: 25 }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            transition={{ type: "spring", stiffness: 80, damping: 15, delay: 0.3 }}
+            className="absolute top-4 left-2 sm:left-6 md:left-12 z-20"
           >
-            <div className="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-              <FiCpu className="text-sm" style={{ color: colors.primary }} />
-            </div>
-            <div className="flex flex-col pr-2">
-              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Neural Link</span>
-              <span className="text-[11px] font-bold text-slate-200 font-mono tracking-wider">PORT_80_OK</span>
-            </div>
+            <motion.div
+              animate={{
+                y: [0, -12, 0],
+                x: [0, 8, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="visionos-glass visionos-glass-hover p-4 rounded-[24px] flex items-center gap-3"
+            >
+              <div className="p-2 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
+                <FiCpu className="text-sm" style={{ color: colors.primary }} />
+              </div>
+              <div className="flex flex-col pr-2">
+                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Neural Link</span>
+                <span className="text-[11px] font-bold text-slate-200 font-mono tracking-wider">PORT_80_OK</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Widget 2: Biometric Scanner Card (Center interactive widget) */}
           <motion.div
-            animate={{
-              y: [0, 8, 0],
-              x: [0, -6, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5,
-            }}
-            className="visionos-glass visionos-glass-hover p-6 rounded-[32px] w-64 md:w-72 absolute z-10 flex flex-col relative overflow-hidden"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 70, damping: 14, delay: 0.2 }}
+            className="absolute z-10"
           >
-            {/* Holographic scan line animation */}
             <motion.div
-              animate={{ top: ["0%", "100%", "0%"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute left-0 right-0 h-[2px] pointer-events-none opacity-40 z-20"
-              style={{
-                background: `linear-gradient(90deg, transparent, ${colors.secondary}, transparent)`,
-                boxShadow: `0 0 8px ${colors.secondary}`,
+              animate={{
+                y: [0, 8, 0],
+                x: [0, -6, 0],
               }}
-            />
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+              className="visionos-glass visionos-glass-hover p-6 rounded-[32px] w-64 md:w-72 flex flex-col relative overflow-hidden"
+            >
+              {/* Holographic scan line animation */}
+              <motion.div
+                animate={{ top: ["0%", "100%", "0%"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute left-0 right-0 h-[2px] pointer-events-none opacity-40 z-20"
+                style={{
+                  background: `linear-gradient(90deg, transparent, ${colors.secondary}, transparent)`,
+                  boxShadow: `0 0 8px ${colors.secondary}`,
+                }}
+              />
 
-            {/* Subtle high-tech spider emblem background overlay */}
-            <div className="absolute -bottom-6 -right-6 w-28 h-28 opacity-[0.03] pointer-events-none text-white">
-              <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                <circle cx="50" cy="50" r="10" strokeWidth="1" />
-                <circle cx="50" cy="50" r="25" strokeWidth="1" />
-                <circle cx="50" cy="50" r="40" strokeWidth="1" />
-                <line x1="10" y1="10" x2="90" y2="90" strokeWidth="1" />
-                <line x1="90" y1="10" x2="10" y2="90" strokeWidth="1" />
-              </svg>
-            </div>
-
-            <div className="flex justify-between items-start mb-4">
-              <div className="flex flex-col">
-                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">IDENTITY</span>
-                <span className="text-sm font-bold text-white font-mono tracking-wide">SECURE_INDEX</span>
-              </div>
-              <span className="text-[8px] font-mono border px-2 py-0.5 rounded-full uppercase" style={{ borderColor: `${colors.primary}55`, color: colors.primary }}>
-                VOS_v26.4
-              </span>
-            </div>
-
-            <div className="flex items-center gap-4 border-t border-b border-white/5 py-4 my-2">
-              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-                <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              {/* Subtle high-tech spider emblem background overlay */}
+              <div className="absolute -bottom-6 -right-6 w-28 h-28 opacity-[0.03] pointer-events-none text-white">
+                <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                  <circle cx="50" cy="50" r="10" strokeWidth="1" />
+                  <circle cx="50" cy="50" r="25" strokeWidth="1" />
+                  <circle cx="50" cy="50" r="40" strokeWidth="1" />
+                  <line x1="10" y1="10" x2="90" y2="90" strokeWidth="1" />
+                  <line x1="90" y1="10" x2="10" y2="90" strokeWidth="1" />
                 </svg>
               </div>
-              <div className="flex flex-col">
-                <span className="text-[11px] font-mono text-slate-300 font-bold">K_ALD_AFASY</span>
-                <span className="text-[9px] text-slate-500 font-mono uppercase tracking-wide">Authorized Core</span>
-              </div>
-            </div>
 
-            <div className="flex items-center justify-between mt-2 font-mono text-[9px] text-slate-400">
-              <span>LOC: SEC_A</span>
-              <span style={{ color: colors.secondary }}>BIOMETRIC_OK</span>
-            </div>
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">IDENTITY</span>
+                  <span className="text-sm font-bold text-white font-mono tracking-wide">SECURE_INDEX</span>
+                </div>
+                <span className="text-[8px] font-mono border px-2 py-0.5 rounded-full uppercase" style={{ borderColor: `${colors.primary}55`, color: colors.primary }}>
+                  VOS_v26.4
+                </span>
+              </div>
+
+              <div className="flex items-center gap-4 border-t border-b border-white/5 py-4 my-2">
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                  <svg className="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[11px] font-mono text-slate-300 font-bold">K_ALD_AFASY</span>
+                  <span className="text-[9px] text-slate-500 font-mono uppercase tracking-wide">Authorized Core</span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between mt-2 font-mono text-[9px] text-slate-400">
+                <span>LOC: SEC_A</span>
+                <span style={{ color: colors.secondary }}>BIOMETRIC_OK</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Widget 3: Tech Arsenal Capsule (Floating center-right) */}
           <motion.div
-            animate={{
-              y: [0, -10, 0],
-              x: [0, -8, 0],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.2,
-            }}
-            className="visionos-glass visionos-glass-hover p-4 rounded-[24px] absolute bottom-24 right-4 sm:right-8 lg:-right-4 z-20 flex flex-col gap-2 min-w-[170px]"
+            initial={{ opacity: 0, scale: 0.7, x: -25, y: -25 }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            transition={{ type: "spring", stiffness: 85, damping: 14, delay: 0.4 }}
+            className="absolute bottom-24 right-4 sm:right-8 lg:-right-4 z-20"
           >
-            <div className="flex items-center gap-2">
-              <FiLayers className="text-xs" style={{ color: colors.secondary }} />
-              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Stack Spec</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5 mt-1">
-              <span className="text-[9px] font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-300">REACT</span>
-              <span className="text-[9px] font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-300">VITE</span>
-              <span className="text-[9px] font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-300">FRAMER</span>
-            </div>
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
+                x: [0, -8, 0],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.2,
+              }}
+              className="visionos-glass visionos-glass-hover p-4 rounded-[24px] flex flex-col gap-2 min-w-[170px]"
+            >
+              <div className="flex items-center gap-2">
+                <FiLayers className="text-xs" style={{ color: colors.secondary }} />
+                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">Stack Spec</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5 mt-1">
+                <span className="text-[9px] font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-300">REACT</span>
+                <span className="text-[9px] font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-300">VITE</span>
+                <span className="text-[9px] font-mono bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-slate-300">FRAMER</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Widget 4: Availability Capsule (Floating bottom-left) */}
           <motion.div
-            animate={{
-              y: [0, 14, 0],
-              x: [0, -10, 0],
-            }}
-            transition={{
-              duration: 9,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.8,
-            }}
-            className="visionos-glass visionos-glass-hover p-3.5 rounded-[22px] absolute bottom-6 left-4 sm:left-12 z-20 flex items-center gap-3"
+            initial={{ opacity: 0, scale: 0.7, x: 25, y: -25 }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            transition={{ type: "spring", stiffness: 75, damping: 12, delay: 0.35 }}
+            className="absolute bottom-6 left-4 sm:left-12 z-20"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <div className="flex flex-col">
-              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">CONTRACTS</span>
-              <span className="text-[10px] font-bold text-slate-200 font-mono tracking-wider mt-0.5">AVAIL_FOR_HIRE</span>
-            </div>
+            <motion.div
+              animate={{
+                y: [0, 14, 0],
+                x: [0, -10, 0],
+              }}
+              transition={{
+                duration: 9,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.8,
+              }}
+              className="visionos-glass visionos-glass-hover p-3.5 rounded-[22px] flex items-center gap-3"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest">CONTRACTS</span>
+                <span className="text-[10px] font-bold text-slate-200 font-mono tracking-wider mt-0.5">AVAIL_FOR_HIRE</span>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.div>
 
